@@ -11,6 +11,7 @@ import net.sf.geographiclib.GeodesicLine;
 import net.sf.geographiclib.GeodesicMask;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,7 +38,7 @@ public class Categorizer {
         }
 
         this.points = this.points.stream()
-                .sorted((o1, o2) -> o1.getTimestamp().compareTo(o2.getTimestamp()))
+                .sorted( Comparator.comparing( Waypoint::getTimestamp ) )
                         .collect( Collectors.toList());
         this.result = new Result(calculateDistanceSpeeding(this.points),
                 calculateDurationSpeeding(this.points),
