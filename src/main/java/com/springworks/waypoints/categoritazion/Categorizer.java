@@ -50,6 +50,9 @@ public class Categorizer {
         this.genericParser = new GenericParser();
         try {
             List<JsonNode> nodes = this.genericParser.parse(filename);
+            if(nodes == null) {
+                throw new IllegalStateException("Waypoints: file not parsed");
+            }
             this.points = new ObjectMapper().convertValue( nodes, new TypeReference<List<Waypoint>>(){} );
         } catch (IOException e) {
             e.printStackTrace();
