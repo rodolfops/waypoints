@@ -1,6 +1,10 @@
 package com.springworks.waypoints.model;
 
+import java.text.DecimalFormat;
+
 public class Result {
+
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     private double distanceSpeeding;
     private double durationSpeeding;
@@ -16,11 +20,11 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "distanceSpeeding=" + distanceSpeeding + " m" +
-                ", durationSpeeding=" + durationSpeeding + " s" +
-                ", totalDistance=" + totalDistance + " m" +
-                ", totalDuration=" + totalDuration + " s" +
+        return "Result {\n" +
+                "   distanceSpeeding = " + df2.format(distanceSpeeding) + " m,\n" +
+                "   durationSpeeding = " + durationSpeeding + " s,\n" +
+                "   totalDistance = " + df2.format(totalDistance) + " m,\n" +
+                "   totalDuration = " + totalDuration + " s,\n" +
                 '}';
     }
 }
