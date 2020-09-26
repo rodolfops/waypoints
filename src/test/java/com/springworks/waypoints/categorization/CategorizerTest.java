@@ -28,6 +28,16 @@ public class CategorizerTest {
     }
 
     @Test
+    public void totalDurationSamePointsTest(){
+        ZonedDateTime now = ZonedDateTime.now();
+        Waypoint firstPoint = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        Waypoint lastPoint = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+
+        double total = categorizer.calculateTotalDuration( lastPoint,firstPoint );
+        assertEquals(0, total, 0.01);
+    }
+
+    @Test
     public void totalDistanceTest(){
         ZonedDateTime now = ZonedDateTime.now();
         Waypoint firstPoint = new Waypoint( now.minusSeconds(20), new Position( 18.0667,59.334), 6.3889, 8.33);
@@ -35,6 +45,16 @@ public class CategorizerTest {
 
         double total = categorizer.calculateTotalDistance( lastPoint,firstPoint );
         assertEquals(189.0, total, 0.5);
+    }
+
+    @Test
+    public void totalDistanceSamePointsTest(){
+        ZonedDateTime now = ZonedDateTime.now();
+        Waypoint firstPoint = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        Waypoint lastPoint = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+
+        double total = categorizer.calculateTotalDistance( lastPoint,firstPoint );
+        assertEquals(0, total, 0.5);
     }
 
     @Test
@@ -52,6 +72,17 @@ public class CategorizerTest {
     }
 
     @Test
+    public void speedingDurationSamePointsTest(){
+        ZonedDateTime now = ZonedDateTime.now();
+        Waypoint point1 = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        Waypoint point2 = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        List<Waypoint> points = Arrays.asList(point1, point2);
+
+        double total = categorizer.calculateDurationSpeeding( points );
+        assertEquals(0, total, 0.01);
+    }
+
+    @Test
     public void speedingDistanceTest(){
         ZonedDateTime now = ZonedDateTime.now();
         Waypoint point1 = new Waypoint( now.minusSeconds(20), new Position( 18.0667,59.334), 6.3889, 8.33);
@@ -63,5 +94,16 @@ public class CategorizerTest {
 
         double total = categorizer.calculateDistanceSpeeding( points );
         assertEquals(112, total, 0.5);
+    }
+
+    @Test
+    public void speedingDistanceSamePointsTest(){
+        ZonedDateTime now = ZonedDateTime.now();
+        Waypoint point1 = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        Waypoint point2 = new Waypoint( now, new Position( 18.0666,59.3323), 8.33, 8.33);
+        List<Waypoint> points = Arrays.asList(point1, point2);
+
+        double total = categorizer.calculateDistanceSpeeding( points );
+        assertEquals(0, total, 0.5);
     }
 }
